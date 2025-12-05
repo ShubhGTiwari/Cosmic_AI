@@ -8,7 +8,7 @@ from pymongo import MongoClient
 
 # --- CONFIGURATION ---
 MONGO_URI = st.secrets["MONGO_URI"] 
-R2_ACCOUNT_ID = st.secrets["R2_ACCOUNT_ID"]
+R2_ACCOUNT_ID = "https://pub-a69e5f62df484ff28675e858598d07cd.r2.dev"
 DB_NAME = "cosmic_research_db"
 MODEL_PATH = "cosmic_brain_v1.h5"
 TRAINING_MEAN = -7.97220180243713e-23
@@ -176,7 +176,7 @@ def main():
                 rag_spot.info(" AI is querying the Historical Database for similar events...")
                 time.sleep(1) 
                 
-                # Fetch the Golden Event (GRB with image)
+                # Fetch the Event
                 match = db.events.find_one({'type': 'Gamma-Ray Burst', 'processed': True, 'image_path': {'$exists': True}})
                 
                 if match:
@@ -188,23 +188,13 @@ def main():
                         st.write("AI Recommendation: This signal pattern matches high-energy merger profiles. Immediate optical follow-up is recommended.")
                     
                     with col_B:
-                        # Construct your Cloudflare Public URL
-                        # Note: We use the direct R2 dev link structure. 
-                        # If you haven't set up a custom domain, this link might need authentication or just show the filename.
-                        # For the DEMO, displaying the local path or the R2 key visually is enough proof.
                         st.write("Optical Evidence Found:")
-                        
-                        # We use the direct public link structure for R2 dev domains if you enabled it
-                        # Otherwise we just show the filename as proof
                         if 'image_path' in match:
-                             # Display image if you have a public bucket URL, else show placeholder logic
-                             # Replace with your actual R2 dev URL if you have one, e.g., https://pub-xxxx.r2.dev
                              image_url = f"https://pub-{R2_ACCOUNT_ID}.r2.dev/{match['image_path']}"
-                             # Fallback for demo: just show the text if URL isn't live
                              st.code(f"R2 Bucket: {match['image_path']}")
                              st.info("Visual asset retrieved from Cloudflare R2 bucket.")
                 
-                time.sleep(5) # Pause to let user see it
+                time.sleep(10) 
                 rag_spot.empty()
                 
             else:
