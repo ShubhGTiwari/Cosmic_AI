@@ -1,0 +1,8 @@
+streamlit
+tensorflow-cpu
+numpy
+matplotlib
+gwpy
+pymongo
+dnspython
+boto3
