@@ -191,6 +191,7 @@ def main():
                         st.write("Optical Evidence Found:")
                         if 'image_path' in match:
                              image_url = f"https://pub-{R2_ACCOUNT_ID}.r2.dev/{match['image_path']}"
+                             st.image(image_url, caption="Hubble Optical Counterpart")
                              st.code(f"R2 Bucket: {match['image_path']}")
                              st.info("Visual asset retrieved from Cloudflare R2 bucket.")
                 
@@ -201,7 +202,7 @@ def main():
                 alert_spot.success(f"System Normal. Background Noise Level. (Score: {prob*100:.4f}%)")
                 rag_spot.empty()
             
-            time.sleep(0.1)
+            time.sleep(1.0)
 
 if __name__ == "__main__":
     main()
