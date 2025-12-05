@@ -8,6 +8,7 @@ from pymongo import MongoClient
 
 # --- CONFIGURATION ---
 MONGO_URI = st.secrets["MONGO_URI"] 
+R2_ACCOUNT_ID = st.secrets["R2_ACCOUNT_ID"]
 DB_NAME = "cosmic_research_db"
 MODEL_PATH = "cosmic_brain_v1.h5"
 TRAINING_MEAN = -7.97220180243713e-23
