@@ -190,7 +190,7 @@ def main():
                     with col_B:
                         st.write("Optical Evidence Found:")
                         if 'image_path' in match:
-                             image_url = f"https://pub-{R2_ACCOUNT_ID}.r2.dev/{match['image_path']}"
+                             image_url = f"{R2_ACCOUNT_ID}/{match['image_path']}"
                              st.image(image_url, caption="Hubble Optical Counterpart")
                              st.code(f"R2 Bucket: {match['image_path']}")
                              st.info("Visual asset retrieved from Cloudflare R2 bucket.")
